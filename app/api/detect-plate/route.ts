@@ -22,8 +22,7 @@ export async function POST(request: NextRequest) {
     // Générer un nom de fichier unique
     const timestamp = Date.now()
     const filename = `temp_${timestamp}.${image.name.split(".").pop()}`
-    tempImagePath = `/tmp/${filename}
-    
+    tempImagePath = `/tmp/${filename}`
 
     // Sauvegarder l'image temporairement
     await writeFile(tempImagePath, buffer)
@@ -54,7 +53,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function runPythonScript(imagePath: string): Promise<any> {
+const runPythonScript = (imagePath: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     const pythonProcess = spawn("python3", [join(process.cwd(), "scripts", "yolo_detection.py"), imagePath])
 
