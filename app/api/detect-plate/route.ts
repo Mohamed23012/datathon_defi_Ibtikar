@@ -22,13 +22,8 @@ export async function POST(request: NextRequest) {
     // Générer un nom de fichier unique
     const timestamp = Date.now()
     const filename = `temp_${timestamp}.${image.name.split(".").pop()}`
-    tempImagePath = join(process.cwd(), "temp", filename)
-
-    // Créer le dossier temp s'il n'existe pas
-    const tempDir = join(process.cwd(), "temp")
-    if (!existsSync(tempDir)) {
-      await mkdir(tempDir, { recursive: true })
-    }
+    tempImagePath = `/tmp/${filename}
+    
 
     // Sauvegarder l'image temporairement
     await writeFile(tempImagePath, buffer)
